@@ -16,6 +16,10 @@ public class Player {
         return hand.remove(playCard);
     }
 
+    public Card getCard(int index){
+        return hand.get(index);
+    }
+
     public void drawCard(Card drawCard){
         hand.addFirst(drawCard);
     }
@@ -23,5 +27,13 @@ public class Player {
     public void printCards(){
         for(Card c : hand)
             System.out.println(c.toString());
+    }
+
+    public int getHandLength(){
+        return hand.size();
+    }
+
+    public String getName(){
+        return name;
     }
 }

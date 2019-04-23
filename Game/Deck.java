@@ -7,11 +7,14 @@ public class Deck {
     LinkedList<Card> drawPile;
     LinkedList<Card> playedCardsPile;
 
-    public Deck(){
+    public Deck(int multiple){
         //could add a for loop around addCards() to add multiple decks with a parameter controller how many multiples
         drawPile = new LinkedList<>();
         playedCardsPile = new LinkedList<>();
-        addCards();
+        for(int i = 0; i < multiple; i++)
+            addCards();
+        //put first card in play
+        playedCardsPile.addFirst(drawPile.removeFirst());
     }
 
     public void addCards() {

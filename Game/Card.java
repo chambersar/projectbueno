@@ -21,8 +21,20 @@ public class Card {
             return false;
     }
 
+    public Suit getSuit(){
+        return suit;
+    }
+
+    public CardType getCardVal(){
+        return value;
+    }
+
+    public void setSuit(Suit s){
+        suit = s;
+    }
+
     @Override
     public String toString(){
-        return "Card: " + value.toString() + " Suit: " + suit.toString();
+        return suit.toString() + " " + value.toString();
     }
 }
