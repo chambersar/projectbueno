@@ -6,6 +6,7 @@ import java.util.LinkedList;
 public class Deck {
     LinkedList<Card> drawPile;
     LinkedList<Card> playedCardsPile;
+    Card blankWild = null;
 
     public Deck(int multiple){
         //could add a for loop around addCards() to add multiple decks with a parameter controller how many multiples
@@ -13,8 +14,6 @@ public class Deck {
         playedCardsPile = new LinkedList<>();
         for(int i = 0; i < multiple; i++)
             addCards();
-        //put first card in play
-        playedCardsPile.addFirst(drawPile.removeFirst());
     }
 
     public void addCards() {
@@ -84,10 +83,32 @@ public class Deck {
 
     public boolean playCard(Card newCard){
         if(Card.checkMove(playedCardsPile.getFirst(), newCard)){
+            //wild card cleanup
+            if(blankWild == playedCardsPile.getFirst()){
+                //remove blank card
+                playedCardsPile.removeFirst();
+                blankWild = null; //book keeping
+            }
             playedCardsPile.addFirst(newCard);
             return true;
         }
         else
             return false;
+    }
+
+    public void playFirstCard(){
+        Card temp = drawCard();
+        //not completely correct but prevents an action card from being the first card on the pile
+        while(temp.getCardVal() == CardType.WildDraw || temp.getCardVal() == CardType.Wild || temp.getCardVal() == CardType.DrawTwo || temp.getCardVal() == CardType.Skip){
+            drawPile.addLast(temp);
+            temp = drawCard();
+        }
+        playedCardsPile.addFirst(temp);
+    }
+
+    void addWild(Card blankWild){
+        //remember blank card because it will need to be removed
+        this.blankWild = blankWild;
+        playedCardsPile.addFirst(blankWild);
     }
 }

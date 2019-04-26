@@ -25,8 +25,11 @@ public class Player {
     }
 
     public void printCards(){
-        for(Card c : hand)
-            System.out.println(c.toString());
+        int count = 0;
+        for(Card c : hand) {
+            System.out.println(count + ") " + c.toString());
+            count++;
+        }
     }
 
     public int getHandLength(){
