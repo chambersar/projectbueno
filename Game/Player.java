@@ -1,42 +1,53 @@
 package Game;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class Player {
-    LinkedList<Card> hand;
-    String name;
+class Player {
+    private ArrayList<Card> hand;
+    private Card lastDrewCard;
+    private String name;
 
-    public Player(String name){
-        hand = new LinkedList<>();
+    Player(String name) {
+        hand = new ArrayList<>();
         this.name = name;
     }
 
-    public boolean playCard(Card playCard){
+    boolean playCard(Card playCard) {
         //returns true and removes card from hand if card is in hand, else returns false
         return hand.remove(playCard);
     }
 
-    public Card getCard(int index){
+    Card getCard(int index) {
         return hand.get(index);
     }
 
-    public void drawCard(Card drawCard){
-        hand.addFirst(drawCard);
+    void drawCard(Card drawCard) {
+        hand.add(drawCard);
+        lastDrewCard = drawCard;
     }
 
-    public void printCards(){
+    Card getLastDrewCard() {
+        return lastDrewCard;
+    }
+
+    void printCards() {
         int count = 0;
-        for(Card c : hand) {
+        for (Card c : hand) {
             System.out.println(count + ") " + c.toString());
             count++;
         }
     }
 
-    public int getHandLength(){
+    int getHandLength() {
         return hand.size();
     }
 
-    public String getName(){
+    String getName() {
         return name;
+    }
+
+    boolean handContainsCard(Card card){
+        return hand.contains(card);
     }
 }

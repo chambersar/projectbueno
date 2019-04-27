@@ -3,12 +3,12 @@ package Game;
 import java.util.Collections;
 import java.util.LinkedList;
 
-public class Deck {
-    LinkedList<Card> drawPile;
-    LinkedList<Card> playedCardsPile;
-    Card blankWild = null;
+class Deck {
+    private LinkedList<Card> drawPile;
+    private LinkedList<Card> playedCardsPile;
+    private Card blankWild = null;
 
-    public Deck(int multiple){
+    Deck(int multiple){
         //could add a for loop around addCards() to add multiple decks with a parameter controller how many multiples
         drawPile = new LinkedList<>();
         playedCardsPile = new LinkedList<>();
@@ -16,7 +16,7 @@ public class Deck {
             addCards();
     }
 
-    public void addCards() {
+    private void addCards() {
         //kind of messy, need to separate into 2 cases, wild or color suit
         //then inside of the if/else put the right number of cards for that suit
         //1 zero, 2 of every other card per every color suit and then 4 wild and 4 wild draw for wild suit
@@ -64,11 +64,11 @@ public class Deck {
         Collections.shuffle(drawPile);
     }
 
-    public Card getTopCard(){
+    Card getTopCard(){
         return playedCardsPile.getFirst();
     }
 
-    public Card drawCard(){
+    Card drawCard(){
         //if no more cards to draw, do work
         //give first card
         if(drawPile.size() == 0){
@@ -81,7 +81,7 @@ public class Deck {
         return drawPile.removeFirst();
     }
 
-    public boolean playCard(Card newCard){
+    boolean playCard(Card newCard){
         if(Card.checkMove(playedCardsPile.getFirst(), newCard)){
             //wild card cleanup
             if(blankWild == playedCardsPile.getFirst()){
@@ -96,7 +96,7 @@ public class Deck {
             return false;
     }
 
-    public void playFirstCard(){
+    void playFirstCard(){
         Card temp = drawCard();
         //not completely correct but prevents an action card from being the first card on the pile
         while(temp.getCardVal() == CardType.WildDraw || temp.getCardVal() == CardType.Wild || temp.getCardVal() == CardType.DrawTwo || temp.getCardVal() == CardType.Skip){

@@ -1,31 +1,19 @@
 package Game;
 
 public class Card {
-    CardType value;
-    Suit suit;
+    private CardType value;
+    private Suit suit;
 
-    public Card(CardType value, Suit suit) {
+    Card(CardType value, Suit suit) {
         this.value = value;
         this.suit = suit;
     }
 
-    public static boolean checkMove(Card topCard, Card newCard){
-        //if wild card then move is always valid
-        //if the new cards suit or value matches the top cards then move is valid
-        //else move is false
-        if(newCard.value == CardType.Wild || newCard.value == CardType.WildDraw)
-            return true;
-        else if(newCard.value == topCard.value || newCard.suit == topCard.suit)
-            return true;
-        else
-            return false;
-    }
-
-    public Suit getSuit(){
+    Suit getSuit(){
         return suit;
     }
 
-    public CardType getCardVal(){
+    CardType getCardVal(){
         return value;
     }
 
